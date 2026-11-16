@@ -21,3 +21,5 @@ frontend/next-env.d.ts
 frontend/tsconfig.tsbuildinfo
 demo/_raw/
 test-results/
+
+.venv/

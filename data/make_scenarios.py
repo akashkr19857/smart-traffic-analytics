@@ -25,12 +25,12 @@ PARK_AT = (3060, 1245)  # top-left corner of the pasted car, inside the northbou
 
 
 def ffmpeg() -> str:
-    tools = HERE.parents[1] / "_shared" / "TOOLS.txt"
-    if tools.exists():
-        for line in tools.read_text(encoding="utf-8").splitlines():
-            if line.startswith("ffmpeg="):
-                return line.split("=", 1)[1].strip()
-    return "ffmpeg"
+    import sys
+
+    sys.path.insert(0, str(HERE.parent / "demo"))
+    from recorder import ffmpeg_path
+
+    return ffmpeg_path()
 
 
 def read_frames(cap: cv2.VideoCapture, start: int, n: int) -> list[bytes]:

@@ -20,15 +20,11 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
-sys.path.insert(0, str(ROOT.parent / "_shared"))
 
 from app.config import load_cameras  # noqa: E402
 from app.vision.pipeline import CameraPipeline, Models  # noqa: E402
 
-try:
-    from gpulock import gpu_lock
-except ImportError:
-    from contextlib import nullcontext as gpu_lock  # type: ignore[assignment]
+from contextlib import nullcontext as gpu_lock  # single-process: no cross-process GPU lock needed
 
 
 def run(cfg, models, path: Path, max_s: float | None = None) -> dict:  # noqa: ANN001

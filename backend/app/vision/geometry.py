@@ -51,6 +51,7 @@ class TrackState:
     plate_reads: list = field(default_factory=list)
     plate: str = ""
     plate_conf: float = 0.0
+    plate_reported: bool = False
     box_h: float = 0.0
 
 

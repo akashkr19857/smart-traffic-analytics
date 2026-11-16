@@ -1,0 +1,20 @@
+# Written and syntax-checked, NOT run: Docker is not installed on the development laptop.
+services:
+  api:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    environment:
+      TRAFFIC_CORS_ORIGINS: http://localhost:3400
+    volumes: [traffic-data:/app/data/runtime]
+    ports: ["8400:8400"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+  web:
+    build:
+      context: ./frontend
+      args: {NEXT_PUBLIC_API_URL: "http://localhost:8400"}
+    ports: ["3400:3400"]
+    depends_on: [api]
+volumes:
+  traffic-data: {}

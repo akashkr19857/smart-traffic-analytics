@@ -26,7 +26,6 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
-sys.path.insert(0, str(ROOT.parent / "_shared"))
 
 from app.anpr.ocr import PlateOCR, PlateRead, normalise, vote  # noqa: E402
 

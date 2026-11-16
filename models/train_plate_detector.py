@@ -15,11 +15,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-sys.path.insert(0, str(ROOT.parent / "_shared"))
-try:
-    from gpulock import gpu_lock
-except ImportError:
-    from contextlib import nullcontext as gpu_lock  # type: ignore[assignment]
+from contextlib import nullcontext as gpu_lock  # single-process: no cross-process GPU lock needed
 
 
 def main() -> None:

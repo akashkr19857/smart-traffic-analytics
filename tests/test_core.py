@@ -147,3 +147,17 @@ def test_pipeline_flags_illegal_parking_after_threshold(stub_yolo):
 def test_moving_vehicle_in_no_parking_zone_is_not_flagged(stub_yolo):
     _, events, _ = _run(lambda i, img: [(520, 300 + i * 4, 580, 350 + i * 4, 2)], _cfg(), 30, stub_yolo)
     assert not [e for e in events if e["type"] == "illegal_parking"]
+
+
+def test_plausible_plate_filter():
+    from app.vision.pipeline import plausible_plate
+
+    assert plausible_plate("NZ412GC") and plausible_plate("3AE5211")
+    assert not plausible_plate("85149701") and not plausible_plate("EENET") and not plausible_plate("AB1") and not plausible_plate("ABCD123456")
+    assert not plausible_plate("A0000")
+
+
+def test_speed_ignored_outside_calibrated_area(stub_yolo):
+    cfg = _cfg(speed_source=[(0, 200), (640, 200), (640, 480), (0, 480)])
+    p, _, _ = _run(lambda i, img: [(300, 20 + i * 5, 360, 70 + i * 5, 2)], cfg, 20, stub_yolo)  # anchors y 70..165: above the quad
+    assert not list(p.tracks.values())[0].speeds

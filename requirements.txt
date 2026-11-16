@@ -1,0 +1,18 @@
+# Python 3.11. Versions = what was installed and tested on the dev machine.
+torch==2.11.0  # CUDA build: pip install torch --index-url https://download.pytorch.org/whl/cu128
+ultralytics==8.4.208
+lap>=0.5.12
+supervision==0.31.5
+opencv-python
+rapidocr==3.10.0
+onnxruntime==1.31.1
+numpy==2.3.5
+fastapi==0.162.2
+uvicorn==0.54.0
+python-multipart==0.0.33
+pydantic-settings==2.16.2
+SQLAlchemy==2.1.8
+# tests / demo
+pytest==9.2.0
+httpx==0.28.1
+playwright==1.64.1

@@ -1,0 +1,49 @@
+{
+ "normal_footage": {
+  "video": "data/raw/vehicles.mp4",
+  "seconds": 21.5,
+  "vehicles_tracked": 10,
+  "vehicles_counted": 9,
+  "counts_by_class": {
+   "truck": 2,
+   "car": 7
+  },
+  "wrong_way_false_alarms": 0,
+  "illegal_parking_false_alarms": 0,
+  "speeding_events": 4,
+  "plate_events": 7,
+  "plates_read": [
+   "4AK1571",
+   "4SH4775",
+   "5AN8938",
+   "7AC3391",
+   "A1R70",
+   "INZ4E126C",
+   "JAE5211"
+  ],
+  "speed_kmh": {
+   "vehicles": 10,
+   "median": 120.0,
+   "p10": 83.8,
+   "p90": 138.4
+  },
+  "ms_per_frame_p50": 22.7,
+  "end_to_end_fps": 9.7
+ },
+ "simulated_incidents": {
+  "note": "SIMULATED: part 1 is time-reversed real footage; the parked car in part 2 is pasted from the same video.",
+  "wrong_way": {
+   "moving_vehicles_in_reversed_segment": 5,
+   "flagged": 5,
+   "detection_rate": 1.0,
+   "wrong_way_events_after_segment": 0
+  },
+  "illegal_parking": {
+   "parked_from_s": 10.0,
+   "events": 1,
+   "first_alert_s": 20.0,
+   "alert_delay_s": 10.0,
+   "configured_threshold_s": 10.0
+  }
+ }
+}

@@ -25,6 +25,13 @@ COCO_NAMES = {2: "car", 3: "motorcycle", 5: "bus", 7: "truck"}
 CLASS_COLORS = {"car": (60, 180, 75), "truck": (245, 130, 48), "bus": (230, 25, 75), "motorcycle": (0, 130, 200)}
 
 
+def plausible_plate(text: str) -> bool:
+    """5-9 characters mixing letters and digits, at least 3 distinct (all-digit, all-letter or "A0000"-style reads are
+    almost always partial or garbage)."""
+    return (5 <= len(text) <= 9 and len(set(text)) >= 3
+            and any(c.isdigit() for c in text) and any(c.isalpha() for c in text))
+
+
 @dataclass
 class FrameResult:
     t: float
@@ -103,10 +110,12 @@ class CameraPipeline:
             return None, None
         i = int(r.boxes.conf.argmax())
         px1, py1, px2, py2 = r.boxes.xyxy[i].cpu().numpy().astype(int)
+        if px2 - px1 < 40 or px1 <= 1 or px2 >= car.shape[1] - 1:  # too small, or cut off by the vehicle box
+            return None, None
         pad = int(0.06 * (px2 - px1))
         crop = car[max(0, py1 - pad):py2 + pad, max(0, px1 - pad):px2 + pad]
         read = self.m.ocr.read(crop)
-        return (read if len(read.text) >= 4 else None), crop
+        return (read if plausible_plate(read.text) else None), crop
 
     # ------------------------------------------------------------------ main step
     def process(self, frame: np.ndarray, t: float, annotate: bool = True) -> FrameResult:
@@ -136,7 +145,7 @@ class CameraPipeline:
             box = det.xyxy[i]
             st.box_h = float(box[3] - box[1])
             # --- speed
-            if world is not None:
+            if world is not None and point_in_polygon((ax, ay), self.cfg.speed_source):  # no extrapolation beyond calibration
                 st.world_pts.append((t, float(world[i][0]), float(world[i][1])))
                 sp = speed_kmh(st.world_pts)
                 if sp is not None and 3 < sp < 250:
@@ -182,8 +191,10 @@ class CameraPipeline:
             else:
                 st.stationary_since = None
             # --- ANPR: vehicles near the camera, a few reads per track, then vote
-            if self.cfg.anpr and self.m.plate is not None and st.box_h >= self.cfg.anpr_min_box_h and len(st.plate_reads) < 8 \
-                    and len(st.image_pts) % 2 == 0:
+            fh, fw = frame.shape[:2]
+            inside = box[0] > 4 and box[1] > 4 and box[2] < fw - 4 and box[3] < fh - 4  # partly out of frame: plate may be cut
+            if self.cfg.anpr and self.m.plate is not None and inside and st.box_h >= self.cfg.anpr_min_box_h \
+                    and len(st.plate_reads) < 8 and len(st.image_pts) % 2 == 0:
                 ta = time.perf_counter()
                 read, crop = self._read_plate(frame, box)
                 anpr_ms += (time.perf_counter() - ta) * 1000
@@ -191,9 +202,10 @@ class CameraPipeline:
                     st.plate_reads.append(read)
                     v = vote(st.plate_reads)
                     if v is not None:
-                        changed = v.text != st.plate
+                        stable = v.text == st.plate  # same result as the previous vote
                         st.plate, st.plate_conf = v.text, v.conf
-                        if changed and len(st.plate_reads) >= 3:
+                        if stable and len(st.plate_reads) >= 3 and not st.plate_reported:  # one event per vehicle
+                            st.plate_reported = True
                             events.append(self._event("plate", st, box, f"{cls} plate {v.text}", "info", crop=crop))
         timings["rules_anpr"] = (time.perf_counter() - t2) * 1000
         timings["anpr"] = anpr_ms
