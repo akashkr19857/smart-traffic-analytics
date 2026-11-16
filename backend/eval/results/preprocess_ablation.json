@@ -1,0 +1,42 @@
+{
+ "raw": {
+  "clean": 0.7697,
+  "degraded": 0.5697
+ },
+ "pad": {
+  "clean": 0.7152,
+  "degraded": 0.503
+ },
+ "gray": {
+  "clean": 0.7667,
+  "degraded": 0.5758
+ },
+ "upscale48": {
+  "clean": 0.7576,
+  "degraded": 0.5545
+ },
+ "upscale96": {
+  "clean": 0.7667,
+  "degraded": 0.5515
+ },
+ "clahe": {
+  "clean": 0.7424,
+  "degraded": 0.5303
+ },
+ "deskew": {
+  "clean": 0.7636,
+  "degraded": 0.5697
+ },
+ "clahe+deskew": {
+  "clean": 0.7424,
+  "degraded": 0.5273
+ },
+ "up48+clahe+deskew+pad": {
+  "clean": 0.7061,
+  "degraded": 0.4818
+ },
+ "up96+clahe+deskew+pad (v1)": {
+  "clean": 0.7061,
+  "degraded": 0.5
+ }
+}

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 20% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --muted: 210 30% 95%;
+  --muted-foreground: 215 16% 42%;
+  --border: 214 25% 88%;
+  --primary: 199 89% 38%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 210 40% 94%;
+  --accent-foreground: 222 47% 15%;
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 152 60% 38%;
+  --warning: 36 92% 48%;
+}
+.dark {
+  --background: 222 40% 7%;
+  --foreground: 210 30% 94%;
+  --card: 222 35% 10%;
+  --card-foreground: 210 30% 94%;
+  --muted: 222 28% 15%;
+  --muted-foreground: 215 18% 65%;
+  --border: 222 22% 20%;
+  --primary: 199 89% 58%;
+  --primary-foreground: 222 47% 8%;
+  --accent: 222 28% 17%;
+  --accent-foreground: 210 30% 94%;
+  --destructive: 0 70% 58%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 152 55% 48%;
+  --warning: 38 92% 56%;
+}
+* { @apply border-border; }
+body { @apply bg-background text-foreground antialiased; }
+.prose-answer p { @apply mb-2 leading-relaxed; }
+.prose-answer ul { @apply mb-2 list-disc pl-5; }
+.prose-answer ol { @apply mb-2 list-decimal pl-5; }
+.prose-answer li { @apply mb-1; }
+.prose-answer strong { @apply font-semibold; }
+.prose-answer table { @apply my-2 w-full text-sm; }
+.prose-answer th, .prose-answer td { @apply border px-2 py-1 text-left align-top; }

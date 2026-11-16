@@ -1,0 +1,23 @@
+# data that scripts download / generate (see data/SOURCES.md)
+data/raw/
+data/plates_yolo/
+data/runtime/
+data/scenarios/*.mp4
+.scratch/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+# models: pretrained weights download automatically; the trained plate model is committed
+models/*.pt
+!models/plate_yolo11n.pt
+models/runs/
+models/*.onnx
+models/*.engine
+# frontend
+frontend/node_modules/
+frontend/.next/
+frontend/next-env.d.ts
+frontend/tsconfig.tsbuildinfo
+demo/_raw/
+test-results/

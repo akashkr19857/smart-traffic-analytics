@@ -1,0 +1,16 @@
+{
+ "clean": {
+  "raw": 0.7697,
+  "adaptive_clahe_std<35": 0.7667,
+  "adaptive_clahe_std<45": 0.7606,
+  "best_conf(raw,clahe+deskew)": 0.7788,
+  "best_conf(raw,deskew)": 0.7727
+ },
+ "degraded": {
+  "raw": 0.5697,
+  "adaptive_clahe_std<35": 0.5455,
+  "adaptive_clahe_std<45": 0.5333,
+  "best_conf(raw,clahe+deskew)": 0.5697,
+  "best_conf(raw,deskew)": 0.5788
+ }
+}

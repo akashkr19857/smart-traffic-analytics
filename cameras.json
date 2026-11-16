@@ -1,0 +1,288 @@
+[
+ {
+  "id": "highway-d1",
+  "name": "Highway overpass (4K)",
+  "description": "Two-carriageway highway seen from an overpass. Speed, wrong-way, hard-shoulder parking and ANPR on vehicles near the camera.",
+  "source": "data/raw/vehicles.mp4",
+  "infer_width": 1280,
+  "speed_source": [
+   [
+    1252,
+    787
+   ],
+   [
+    2298,
+    803
+   ],
+   [
+    5039,
+    2159
+   ],
+   [
+    -550,
+    2159
+   ]
+  ],
+  "speed_target_m": [
+   25,
+   250
+  ],
+  "speed_limit_kmh": 130,
+  "vanishing_point": [
+   1770,
+   450
+  ],
+  "direction_zones": [
+   {
+    "name": "Southbound (toward camera)",
+    "polygon": [
+     [
+      1500,
+      645
+     ],
+     [
+      1680,
+      645
+     ],
+     [
+      1725,
+      2160
+     ],
+     [
+      120,
+      2160
+     ]
+    ],
+    "legal": "away"
+   },
+   {
+    "name": "Northbound (away from camera)",
+    "polygon": [
+     [
+      1740,
+      600
+     ],
+     [
+      1860,
+      600
+     ],
+     [
+      3840,
+      1800
+     ],
+     [
+      3840,
+      2160
+     ],
+     [
+      2115,
+      2160
+     ]
+    ],
+    "legal": "toward"
+   }
+  ],
+  "no_parking_zones": [
+   [
+    [
+     1185,
+     1005
+    ],
+    [
+     1110,
+     1005
+    ],
+    [
+     0,
+     1700
+    ],
+    [
+     0,
+     1980
+    ]
+   ],
+   [
+    [
+     2010,
+     750
+    ],
+    [
+     2160,
+     750
+    ],
+    [
+     3840,
+     1500
+    ],
+    [
+     3840,
+     1830
+    ]
+   ]
+  ],
+  "count_line": [
+   [
+    0,
+    1500
+   ],
+   [
+    3840,
+    1500
+   ]
+  ],
+  "anpr": true,
+  "anpr_min_box_h": 260
+ },
+ {
+  "id": "highway-incidents",
+  "name": "Highway incidents (SIMULATED)",
+  "description": "SIMULATED test feed built from the same highway video: a time-reversed segment (wrong-way drivers) and a car image pasted on the hard shoulder (illegal parking). See data/make_scenarios.py.",
+  "source": "data/scenarios/incidents.mp4",
+  "infer_width": 1280,
+  "speed_source": [
+   [
+    1252,
+    787
+   ],
+   [
+    2298,
+    803
+   ],
+   [
+    5039,
+    2159
+   ],
+   [
+    -550,
+    2159
+   ]
+  ],
+  "speed_target_m": [
+   25,
+   250
+  ],
+  "speed_limit_kmh": 130,
+  "vanishing_point": [
+   1770,
+   450
+  ],
+  "direction_zones": [
+   {
+    "name": "Southbound (toward camera)",
+    "polygon": [
+     [
+      1500,
+      645
+     ],
+     [
+      1680,
+      645
+     ],
+     [
+      1725,
+      2160
+     ],
+     [
+      120,
+      2160
+     ]
+    ],
+    "legal": "away"
+   },
+   {
+    "name": "Northbound (away from camera)",
+    "polygon": [
+     [
+      1740,
+      600
+     ],
+     [
+      1860,
+      600
+     ],
+     [
+      3840,
+      1800
+     ],
+     [
+      3840,
+      2160
+     ],
+     [
+      2115,
+      2160
+     ]
+    ],
+    "legal": "toward"
+   }
+  ],
+  "no_parking_zones": [
+   [
+    [
+     1185,
+     1005
+    ],
+    [
+     1110,
+     1005
+    ],
+    [
+     0,
+     1700
+    ],
+    [
+     0,
+     1980
+    ]
+   ],
+   [
+    [
+     2010,
+     750
+    ],
+    [
+     2160,
+     750
+    ],
+    [
+     3840,
+     1500
+    ],
+    [
+     3840,
+     1830
+    ]
+   ]
+  ],
+  "count_line": [
+   [
+    0,
+    1500
+   ],
+   [
+    3840,
+    1500
+   ]
+  ],
+  "anpr": true,
+  "anpr_min_box_h": 260
+ },
+ {
+  "id": "expressway-city",
+  "name": "City expressway (1080p)",
+  "description": "Dense urban expressway: vehicle counting, classification and congestion.",
+  "source": "data/raw/vehicles-2.mp4",
+  "infer_width": 1280,
+  "count_line": [
+   [
+    0,
+    760
+   ],
+   [
+    1920,
+    760
+   ]
+  ],
+  "anpr": false
+ }
+]

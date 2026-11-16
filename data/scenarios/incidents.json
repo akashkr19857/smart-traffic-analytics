@@ -1,0 +1,18 @@
+{
+ "fps": 25.0,
+ "wrong_way_segment_s": [
+  0,
+  8.0
+ ],
+ "parked_vehicle": {
+  "from_s": 10.0,
+  "to_s": 26.0,
+  "box_4k": [
+   3060,
+   1245,
+   3275,
+   1415
+  ]
+ },
+ "note": "SIMULATED: part 1 is time-reversed real footage; the parked car in part 2 is pasted from the same video."
+}
